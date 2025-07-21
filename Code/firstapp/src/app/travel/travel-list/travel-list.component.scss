@@ -1,0 +1,8 @@
+
+li.all-included{
+    border: solid 2px green;
+}
+
+li:not(.all-included){
+        border: solid 2px red;
+}

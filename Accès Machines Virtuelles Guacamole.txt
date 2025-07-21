@@ -1,0 +1,13 @@
+﻿Session: 25105179
+Salle: 10.01
+Formateur: DMS
+Date de début: 2025-07-21
+
+Connection : https://lab.ib-formation.fr/
+
+
+10.01	Poste12	jean-marc.serruya21	YRT6f3gy
+10.01	Poste13	lucas.peyrusaubes21	yuNbx9dg
+10.01	Poste14	francois.brunel21	Xwzxc9bd
+10.01	Poste15	stephan.camilleri21	q97dwRbc
+10.01	Poste16	youness.riouali21	LJRuMNAf
