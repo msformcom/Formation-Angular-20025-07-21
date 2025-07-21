@@ -1,10 +1,15 @@
 import { Component, inject, Input } from '@angular/core';
 import { Travel } from '../../../models/travel';
 import { TravelListComponent } from '../travel-list/travel-list.component';
+import { CommonModule, CurrencyPipe, TitleCasePipe, UpperCasePipe } from '@angular/common';
+
+
+
+
 
 @Component({
   selector: 'firstapp-travel-list-item',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './travel-list-item.component.html',
   styleUrl: './travel-list-item.component.scss'
 })

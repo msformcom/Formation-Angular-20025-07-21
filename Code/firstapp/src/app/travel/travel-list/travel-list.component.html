@@ -1,53 +1,6 @@
 <h3>Liste des voyages</h3>
 <p>Nombre de voyages : {{travels.length}}</p>
 
-<!-- Inclure cet ul dans le DOM si condition -->
-<ul *ngIf="travels.length>0">
-    <!-- Répéter le li pour chaque élément dans travels-->
-    <li *ngFor="let a of travels;let i=index; let o=odd;let e=even;
-            let l=last;let f=first;let nb=count"
-        id="2+{{a.prix}}"
-        [id]="Math.cos(a.prix)"
-
-        style="background-color: {{ o ? 'blue' : 'red'}};" 
-        
-        [style.background-color]="o ? 'yellow' : 'green'"
-        [style.width.px]="a.prix/20"
-        [ngStyle]="getStyle(a)"
-
-            
->
-    
-            {{i+1}}/{{nb}} - {{a.label}} - {{prixAvecMarge(a.prix)}}
-        </li>
-</ul>
-
-@if(travels.length>0){
-    <ul>
-        @for(a of travels; track a.label; let o=$odd){
-            <li style="background-color: {{ o ? 'blue' : 'red'}};" >{{a.label}}</li>
-        }
-    </ul>
-}
-
-<!-- Utilisation du tableau calculé dans le component 
-mapping de Travel => Objet consommable par la vue 
--->
- 
-<ul>
-@for(a of travelsAvecMarge; track a.label){
-      
-      <li [ngStyle]="a.style" 
-            [style]="a.styleCss" 
-            [class.all-included]="a.allIncluded"
-            [ngClass]="getClasses(a)"
-            [attr.data-tool]="a.prix"
-            
-            >{{a.label}} - {{a.avecMarge}}</li>
-
-}
-</ul> 
-
 <!-- Répétition d'un élément de la liste-->
 <div class="list-group">
     @for(t of travels;track t){

@@ -16,8 +16,8 @@ export class TravelListComponent {
   // Normalement : Appel à une méthode d'un service
 
   travels:Travel[]=[
-    {label:"Montreux",prix:1000,allIncluded:true},
-    {label:"Rome",prix:500,allIncluded:false},
+    {label:"Montreux",prix:1000.1,allIncluded:true},
+    {label:"Rome",prix:500.123456,allIncluded:false},
   
   ]
 
