@@ -1,0 +1,46 @@
+.toto{
+
+}
+
+h1{
+
+}
+
+#main{
+
+}
+
+h1.toto#main{
+
+}
+
+h1, #main{
+
+}
+
+h1 .toto{
+
+}
+
+h1>.toto{
+
+}
+
+[disabled]{
+
+}
+a[href='www.google.fr']{
+
+}
+
+a[href$='.pdf']{
+
+}
+a[href^='http:']{
+    
+}
+a[href~='google']{}
+
+:host{
+    color:blue;
+}

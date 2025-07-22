@@ -1,0 +1,7 @@
+<div class="form-group">
+    <button class="btn btn-primary" [disabled]="!canIncrement(-10)" (click)="increment(-10)">&lt;&lt;</button>
+    <button class="btn btn-primary" [disabled]="!canIncrement(-1)" (click)="increment(-1)">-</button>
+    <div class="form-control">{{value}}</div>
+    <button class="btn btn-primary" [disabled]="!canIncrement(1)" (click)="increment(1)">+</button>
+    <button class="btn btn-primary" [disabled]="!canIncrement(10)" (click)="increment(10)">&gt;&gt;</button>
+</div>

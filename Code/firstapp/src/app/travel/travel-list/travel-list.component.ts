@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, Injector, OnInit } from '@angular/core';
 import { Travel } from '../../../models/travel';
 import { CommonModule } from '@angular/common';
 import { TravelListItemComponent } from '../travel-list-item/travel-list-item.component';
@@ -19,6 +19,12 @@ export class TravelListComponent implements OnInit {
   // Normalement : Appel à une méthode d'un service
 
   dataService=inject(DataService);
+  injector=inject(Injector);
+
+  rarementUtilisee(){
+    // J'utilise la référence de l'injecteur pour obtenir ma resource
+    let serviceComplexe=this.injector.get(DataService);
+  }
 
 
   // Méthode cycle de vie du component
@@ -31,6 +37,10 @@ export class TravelListComponent implements OnInit {
     // Pas d'attente dans le ts => je compte sur le pipe async pour attendre 
     // et mettre à jour la partie de l'UI qui dépend du resultat de la promesse
     // pas besoin de la détection des changements => le pipe s'en charge
+    
+    // inject n'est disponible que au moment de l'initialisation de la class
+    //let dataService=inject(DataService);
+
     this.$travels=this.dataService.getTravelsAsync("");
   }
  // Avec callback

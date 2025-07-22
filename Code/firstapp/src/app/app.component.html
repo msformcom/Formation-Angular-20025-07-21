@@ -1,3 +1,29 @@
 <!-- View = Template => Défini l'affichage des données du Component -->
-<h1>{{title}}</h1>
-<firstapp-travel-list></firstapp-travel-list>
+<h1 #h1Ref>{{title}}</h1>
+
+<firstapp-two-cols>
+    <div role="col1">
+        Contenu de col1
+    </div>
+    <div role="col2">
+        Contenu de col 2
+    </div>
+</firstapp-two-cols>
+
+
+<input (input)="true" #inputRef type="text">
+<!-- inputRef est une reference vers l'élément du DOM (input)-->
+{{ inputRef.value=="" ?"Remplir l'input":""}}
+
+<firstapp-travel-list #tc="timeCounter" timeCounter="blue"></firstapp-travel-list>
+Cumul : {{tc.cumul}}
+<button (click)="tc.reset()">Reset</button>
+<button (click)="resetCumul()">Reset</button>
+
+
+<p [attr.data-id]="4" [style.color]="'red'">Dans app.component nombre vaut {{nombre}}</p>
+<button (click)="nombre=nombre+1">Add 1</button>
+<firstapp-number-editor [value]="nombre+1000"  [min]="0"  [max]="20" (valueIncrement)="$event" (valueChange)="nombre=$event"></firstapp-number-editor>
+<br>
+<firstapp-number-editor #editor1Ref [(value)]="nombre" [min]="10"  [max]="0"></firstapp-number-editor>
+<button (click)="editor1Ref.increment(1)">Apoute 1</button>
