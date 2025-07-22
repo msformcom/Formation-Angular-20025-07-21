@@ -2,6 +2,7 @@ import { Component, inject, Input } from '@angular/core';
 import { Travel } from '../../../models/travel';
 import { TravelListComponent } from '../travel-list/travel-list.component';
 import { CommonModule, CurrencyPipe, TitleCasePipe, UpperCasePipe } from '@angular/common';
+import { EllipsisPipe } from '../../pipes/ellipsis.pipe';
 
 
 
@@ -9,7 +10,7 @@ import { CommonModule, CurrencyPipe, TitleCasePipe, UpperCasePipe } from '@angul
 
 @Component({
   selector: 'firstapp-travel-list-item',
-  imports: [CommonModule],
+  imports: [CommonModule, EllipsisPipe],
   templateUrl: './travel-list-item.component.html',
   styleUrl: './travel-list-item.component.scss'
 })

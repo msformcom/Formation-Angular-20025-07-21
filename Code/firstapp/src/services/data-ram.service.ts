@@ -1,0 +1,28 @@
+import { Injectable } from '@angular/core';
+import { DataService } from './data-service';
+import { Travel } from '../models/travel';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class DataRamService extends DataService {
+  data=   [
+    {label:"Montreux",prix:1000.1,allIncluded:true},
+        {label:"Montreux by night",prix:1199.1,allIncluded:true},
+    {label:"Rome un matin d'été brumeux et calme avec un café dans la main",prix:500.123456,allIncluded:false},
+  ]
+  // Methode async qui renvoit les données 
+  override getTravelsAsync(search: string=""): Promise<Travel[]> {
+    return Promise.resolve(this.data.filter(c=>c.label.indexOf(search)>-1));
+  }
+  override getTravelAsync(id: string): Promise<Travel> {
+    throw new Error('Method not implemented.');
+  }
+  override createTravelAsync(t: Travel): Promise<string> {
+    throw new Error('Method not implemented.');
+  }
+
+  constructor() { 
+    super();
+  }
+}

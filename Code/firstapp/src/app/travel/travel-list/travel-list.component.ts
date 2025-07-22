@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Travel } from '../../../models/travel';
 import { CommonModule } from '@angular/common';
 import { TravelListItemComponent } from '../travel-list-item/travel-list-item.component';
+import { DataRamService } from '../../../services/data-ram.service';
+import { DataService } from '../../../services/data-service';
 
 @Component({
   selector: 'firstapp-travel-list',
@@ -11,51 +13,36 @@ import { TravelListItemComponent } from '../travel-list-item/travel-list-item.co
   styleUrl: './travel-list.component.scss',
   standalone:true
 })
-export class TravelListComponent {
+export class TravelListComponent implements OnInit {
+  // Implementer OnInit garantit de ne pas faire d'erreur sur la méthode ngOnInit
   // Obtention de la liste des Travel
   // Normalement : Appel à une méthode d'un service
 
-  travels:Travel[]=[
-    {label:"Montreux",prix:1000.1,allIncluded:true},
-    {label:"Rome",prix:500.123456,allIncluded:false},
-  
-  ]
-
-  // Création d'un tableau adapté à la vue
-  travelsAvecMarge=this.travels.map(t=>({
-      ...t,
-      avecMarge:t.prix*1.2,
-      style:this.getStyle(t),
-      styleCss:`width:${t.prix/10}px;`
-  }));
-
-  
+  dataService=inject(DataService);
 
 
-  // Dans le template seuls les objets référencés dans le component sont utilisables
-  Math=Math;
+  // Méthode cycle de vie du component
+  // Exécutée auytomatiquement par Angular une seule fois
+  // Avec async/await
+  async ngOnInit(){
+    // Gestion de la promesse explicite avec détection des changement
+    //this.travels=await this.dataService.getTravelsAsync("")
 
-  // Calcul de marge avec fonction => exécution de la fonction à chaque détetction de changement
-  prixAvecMarge(p:number){
-    return p*1.2;
+    // Pas d'attente dans le ts => je compte sur le pipe async pour attendre 
+    // et mettre à jour la partie de l'UI qui dépend du resultat de la promesse
+    // pas besoin de la détection des changements => le pipe s'en charge
+    this.$travels=this.dataService.getTravelsAsync("");
   }
+ // Avec callback
+  ngOnInit2(){
 
-  // Générer un objet contenant les attributs de style pour un Travel
-  // appliquer avec ngStyle
-  getStyle(t:Travel){
-    return ({
-      "width.px":t.prix/10,
-      "background-color": t.allIncluded ?'green' : 'blue'
-    })
+     this.dataService.getTravelsAsync("").then(r=>{
+      this.travels=r;
+     })
   }
+  travels?: Travel[]
+  $travels?:Promise<Travel[]>;
 
-    // Générer un objet contenant les attributs nommés en
-    //  fonction des classes à appliquer pour un Travel
-    // appliquer avec ngClass
-  getClasses(t:Travel){
-    return ({
-      "all-included":t.allIncluded
-    })
-  }
+
 
 }

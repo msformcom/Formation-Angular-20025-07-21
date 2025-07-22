@@ -1,10 +1,18 @@
 <h3>Liste des voyages</h3>
+@if($travels | async ; as travels){
+    
 <p>Nombre de voyages : {{travels.length}}</p>
 
 <!-- Répétition d'un élément de la liste-->
 <div class="list-group">
     @for(t of travels;track t){
-        <!-- [travel] fait référence au @Input du firstapp-travel-list-item -->
-        <firstapp-travel-list-item [voyage]="t"></firstapp-travel-list-item>
+    <!-- [travel] fait référence au @Input du firstapp-travel-list-item -->
+    <firstapp-travel-list-item [voyage]="t"></firstapp-travel-list-item>
     }
 </div>
+}
+@else {
+<div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+</div>
+}
