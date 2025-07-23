@@ -1,2 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @use "../node_modules/bootstrap/scss/bootstrap.scss";
+
+.ng-invalid.ng-dirty{
+    @extend .is-invalid;
+}

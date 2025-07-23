@@ -1,7 +1,19 @@
-<p>page-travel-edit works!</p>
+<h3>Edition du Travel</h3>
 <!--  travelSignal va automatiquement mettre à jour le contenu du if si la valeur contenue est modifiee -->
 @if(travelSignal(); as travel){
-    {{travel.id}}
+{{travel | json}}
+<form #formModel="ngForm" (ngSubmit)="validate()">
+    <div  class="form-group">
+        <label>Libelé</label>
+        <input name="label" #labelModel="ngModel" 
+                minlength="5" required 
+                [(ngModel)]="travel.label" class="form-control"
+            type="text">
+
+        <firstapp-validation [model]="labelModel"></firstapp-validation>
+    </div>
+    <hr>
+    <button class="btn btn-danger" [disabled]="formModel.invalid">Valider</button>
+</form>
 }
 <hr>
-{{prixSignal()}} €

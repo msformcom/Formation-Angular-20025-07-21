@@ -9,6 +9,10 @@ export abstract class DataService {
     // methode async
     abstract getTravelsAsync(search:string) : Promise<Travel[]>;
     abstract getTravelAsync(id:string) : Promise<Travel>;
+
+    abstract updateTravelAsync(id:string,t:Travel): Promise<Travel>;
+
+
     abstract createTravelAsync(t:Travel): Promise<string>; // return 
     // Implementation commune à toutes les classes filles
     async getTravelsCountAsync(search : string){

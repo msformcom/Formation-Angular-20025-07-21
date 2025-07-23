@@ -1,0 +1,11 @@
+@if(model && model.errors; as errors){
+<div class="text-danger">
+    @if(errors['required']){
+    <span>Le {{model.name}} est requis</span>
+    }
+    @if(errors['minlength']; as minlength){
+    <span>Le {{model.name}} doit avoir au moins {{minlength.requiredLength}} caractères</span>
+    }
+
+</div>
+}

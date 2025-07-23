@@ -10,6 +10,7 @@ import locale_fr from "@angular/common/locales/fr"
 import { DataService } from '../services/data-service';
 import { DataRamService } from '../services/data-ram.service';
 import { TravelItemLinkUrl } from './travel/travel-list-item/travel-list-item.component';
+import { ErrorsService } from '../services/errors.service';
 
 // Ajouter les locales que je vais utiliser dans mon appli
 registerLocaleData(locale_fr, "fr-FR");
@@ -17,6 +18,11 @@ registerLocaleData(locale_fr, "fr-FR");
 const services: (Provider | EnvironmentProviders)[] = [
   provideZoneChangeDetection({ eventCoalescing: true }),
   provideRouter(routes, withHashLocation()),
+  {provide:ErrorsService, useFactory:()=>{
+    return new ErrorsService();
+  
+  }},
+
   // Association entre demande pour DataService
   // et création d'une instance de DataRamService (singleton)
    {provide: TravelItemLinkUrl, useValue:(id:string)=>"/travel/details/"+id},

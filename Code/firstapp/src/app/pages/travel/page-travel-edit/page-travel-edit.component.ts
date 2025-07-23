@@ -1,14 +1,18 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, effect, inject, OnInit, signal } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, effect, inject, Injector, OnInit, signal } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../../../../services/data-service';
 import { Travel } from '../../../../models/travel';
+import { FormsModule } from '@angular/forms';
+import { JsonPipe, Location } from '@angular/common';
+import { ControlsModule } from '../../../controls/controls.module';
+import { ErrorsService } from '../../../../services/errors.service';
 
 @Component({
   selector: 'firstapp-page-travel-edit',
-  imports: [],
+  imports: [FormsModule,JsonPipe, ControlsModule],
   templateUrl: './page-travel-edit.component.html',
   styleUrl: './page-travel-edit.component.scss',
-  changeDetection:ChangeDetectionStrategy.OnPush
+  //changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class PageTravelEditComponent implements OnInit {
   constructor(){
@@ -19,6 +23,7 @@ export class PageTravelEditComponent implements OnInit {
     effect(()=>{ console.log(s3)});
     s1.update(c=>c+1); // s1() => 4 et  s3()=> 7 et  effect dépendant de s3 => console.log
 
+
   }
 
 
@@ -27,15 +32,9 @@ export class PageTravelEditComponent implements OnInit {
   ngOnInit(): void {
       // possibilité de maj UI En dehors de l'utilisation des signaux
       // MAJ UI toutes les secondes
-      setInterval(() => {
-        this.changeDetector.detectChanges();
-      }, 1000);
-
-      // signalNombre => (2)
-      this.signalNombre.update(c=>c+1);
-         // signalNombre => (3)
-      this.signalNombre.set(this.signalNombre()+1);
-         // signalNombre => (4)
+      // setInterval(() => {
+      //   this.changeDetector.detectChanges();
+      // }, 1000);
 
 
     // this.activatedRoute.queryParams => .. ?toto=1
@@ -56,22 +55,26 @@ export class PageTravelEditComponent implements OnInit {
   // Objet me permettant d'avoir les infos de la route
   activatedRoute=inject(ActivatedRoute);
   dataService=inject(DataService);
-  signalNombre=signal(2);
-
-
-  // valeur de travel => mise à jour dans l'ui seuelement avec zone.js
-  travel?:Travel;
+  injector=inject(Injector);
 
   // Sans compter sur zone.js
   // Signal => objet qui contient une valeur de type Travel | undefined
   travelSignal=signal<Travel|undefined>(undefined);
 
-  // effect => va exécuter la fonction si les signaux utilisés dans la fonction changent de valeur
-  logChangementTravel=  effect(()=>{
-      console.log(this.travelSignal());
-    })
+  async validate(){
+    try {
+          await this.dataService.updateTravelAsync(this.travelSignal()!.id,this.travelSignal()!);
+          // Je dmeande le routeur seulement si besoin
+          let router=this.injector.get(Router);
+          router.navigateByUrl("/travel/list");
 
-    // Nouveau signal avec une valeur qui évolue en fonction de travelSignal
-  prixSignal=computed(()=>this.travelSignal()?.prix);
+          // let location=this.injector.get(Location);
+          // location.back();
+    } catch (error) {
+      let errorService=this.injector.get(ErrorsService);
+      errorService.showError({label:"Pas trouve", type:"danger", timeout:5000});
+    }
+
+  }
 
 }

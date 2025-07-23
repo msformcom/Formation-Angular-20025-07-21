@@ -2,10 +2,15 @@ import { Injectable } from '@angular/core';
 import { DataService } from './data-service';
 import { Travel } from '../models/travel';
 import {Guid} from "guid-typescript";
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class DataRamService extends DataService {
+  override async updateTravelAsync(id: string, t: Travel): Promise<Travel> {
+    return Promise.reject(new Error());
+    let travel=await this.getTravelAsync(id);
+    Object.assign(travel,t);
+    return travel
+
+  }
   data: Travel[]=   [
        {id:"1",label:"Montreux",prix:1000.1,allIncluded:true},
         {id:"2",label:"Montreux by night",prix:1199.1,allIncluded:true},
