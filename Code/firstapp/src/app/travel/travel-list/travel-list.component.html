@@ -1,7 +1,7 @@
 
 @if($travels | async ; as travels){
     
-<p>Nombre de voyages : {{travels.length}}</p>
+<p data-test-counter >Nombre de voyages : {{travels.length}}</p>
 
 <!-- Répétition d'un élément de la liste-->
 <div class="list-group">
@@ -12,7 +12,7 @@
 </div>
 }
 @else {
-<div class="spinner-border" role="status">
+<div data-test-spinner class="spinner-border" role="status">
     <span class="visually-hidden">Loading...</span>
 </div>
 }

@@ -1,5 +1,5 @@
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
-    @for(error of errorService.$errors | async; track error){
+    @for(error of errorService.errorSignal(); track error){
 
   <div id="liveToast" class="toast toast-{{error.type}} show" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="toast-header">

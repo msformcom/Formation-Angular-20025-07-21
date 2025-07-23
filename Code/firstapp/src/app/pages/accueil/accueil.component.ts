@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { ControlsModule } from "../../controls/controls.module";
 
 @Component({
   selector: 'firstapp-accueil',
-  imports: [],
+  imports: [ControlsModule],
   templateUrl: './accueil.component.html',
   styleUrl: './accueil.component.scss'
 })

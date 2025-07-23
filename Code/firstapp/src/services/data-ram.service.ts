@@ -18,6 +18,12 @@ export class DataRamService extends DataService {
   ]
   // Methode async qui renvoit les données 
   override getTravelsAsync(search: string=""): Promise<Travel[]> {
+
+    return new Promise((resolve,reject)=>{
+      setTimeout(() => {
+        resolve(this.data.filter(c=>c.label.indexOf(search)>-1));
+      }, 1000);
+    })
     return Promise.resolve(this.data.filter(c=>c.label.indexOf(search)>-1));
   }
   override getTravelAsync(id: string): Promise<Travel> {

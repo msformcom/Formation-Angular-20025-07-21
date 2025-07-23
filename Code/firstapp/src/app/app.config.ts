@@ -18,10 +18,7 @@ registerLocaleData(locale_fr, "fr-FR");
 const services: (Provider | EnvironmentProviders)[] = [
   provideZoneChangeDetection({ eventCoalescing: true }),
   provideRouter(routes, withHashLocation()),
-  {provide:ErrorsService, useFactory:()=>{
-    return new ErrorsService();
-  
-  }},
+  {provide:ErrorsService, useClass:ErrorsService},
 
   // Association entre demande pour DataService
   // et création d'une instance de DataRamService (singleton)
