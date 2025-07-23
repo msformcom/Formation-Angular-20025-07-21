@@ -1,4 +1,4 @@
-import { Component, inject, Injector, OnInit } from '@angular/core';
+import { Component, inject, Injector, Input, OnInit } from '@angular/core';
 import { Travel } from '../../../models/travel';
 import { CommonModule } from '@angular/common';
 import { TravelListItemComponent } from '../travel-list-item/travel-list-item.component';
@@ -43,6 +43,13 @@ export class TravelListComponent implements OnInit {
 
     this.$travels=this.dataService.getTravelsAsync("");
   }
+
+  @Input()
+  searchText="";
+
+
+
+
  // Avec callback
   ngOnInit2(){
 

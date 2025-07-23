@@ -1,0 +1,7 @@
+<p>page-travel-edit works!</p>
+<!--  travelSignal va automatiquement mettre à jour le contenu du if si la valeur contenue est modifiee -->
+@if(travelSignal(); as travel){
+    {{travel.id}}
+}
+<hr>
+{{prixSignal()}} €

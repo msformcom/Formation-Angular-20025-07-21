@@ -1,5 +1,5 @@
 @if(travel){
-<li class="list-group-item d-flex justify-content-between align-items-start">
+<li [routerLink]="linkFunction(travel.id)" class="list-group-item d-flex justify-content-between align-items-start">
     <div class="ms-2 me-auto">
       <div class="fw-bold">{{travel.label | uppercase | ellipsis : 30}}</div>
       {{travel.allIncluded ? 'Tout inclus':'Tout payant' | titlecase}}

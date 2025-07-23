@@ -1,22 +1,28 @@
 import { Injectable } from '@angular/core';
 import { DataService } from './data-service';
 import { Travel } from '../models/travel';
-
+import {Guid} from "guid-typescript";
 @Injectable({
   providedIn: 'root'
 })
 export class DataRamService extends DataService {
-  data=   [
-    {label:"Montreux",prix:1000.1,allIncluded:true},
-        {label:"Montreux by night",prix:1199.1,allIncluded:true},
-    {label:"Rome un matin d'été brumeux et calme avec un café dans la main",prix:500.123456,allIncluded:false},
+  data: Travel[]=   [
+       {id:"1",label:"Montreux",prix:1000.1,allIncluded:true},
+        {id:"2",label:"Montreux by night",prix:1199.1,allIncluded:true},
+        {id:"3",label:"Rome un matin d'été brumeux et calme avec un café dans la main",prix:500.123456,allIncluded:false},
   ]
   // Methode async qui renvoit les données 
   override getTravelsAsync(search: string=""): Promise<Travel[]> {
     return Promise.resolve(this.data.filter(c=>c.label.indexOf(search)>-1));
   }
   override getTravelAsync(id: string): Promise<Travel> {
-    throw new Error('Method not implemented.');
+    let t=this.data.find(c=>c.id==id);
+    if(!t){
+      return Promise.reject(new Error("Non trouvé"));
+    }
+    else{
+      return Promise.resolve(t);
+    }
   }
   override createTravelAsync(t: Travel): Promise<string> {
     throw new Error('Method not implemented.');

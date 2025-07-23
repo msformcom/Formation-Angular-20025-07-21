@@ -1,5 +1,4 @@
 import { Component, EventEmitter, inject, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'firstapp-number-editor',

@@ -37,7 +37,27 @@
             "scripts": []
           },
           "configurations": {
+            "client1": {
+              "assets": ["public/client1"],
+              "styles": ["src/stylesClient1.scss"],
+              "outputPath":"dist/client1",
+              "baseHref": "/ce/index.html",
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
             "production": {
+              "baseHref": "/index.html",
               "budgets": [
                 {
                   "type": "initial",

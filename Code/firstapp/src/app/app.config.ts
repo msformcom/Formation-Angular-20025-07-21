@@ -1,5 +1,5 @@
 import { ApplicationConfig, DEFAULT_CURRENCY_CODE, EnvironmentProviders, LOCALE_ID, Provider, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withHashLocation } from '@angular/router';
 
 import { routes } from './app.routes';
 import { EllipsisPipeMaxCaracters } from './pipes/ellipsis.pipe';
@@ -9,16 +9,17 @@ import { registerLocaleData } from '@angular/common';
 import locale_fr from "@angular/common/locales/fr"
 import { DataService } from '../services/data-service';
 import { DataRamService } from '../services/data-ram.service';
+import { TravelItemLinkUrl } from './travel/travel-list-item/travel-list-item.component';
 
 // Ajouter les locales que je vais utiliser dans mon appli
 registerLocaleData(locale_fr, "fr-FR");
 
 const services: (Provider | EnvironmentProviders)[] = [
   provideZoneChangeDetection({ eventCoalescing: true }),
-  provideRouter(routes),
+  provideRouter(routes, withHashLocation()),
   // Association entre demande pour DataService
   // et création d'une instance de DataRamService (singleton)
-
+   {provide: TravelItemLinkUrl, useValue:(id:string)=>"/travel/details/"+id},
   { provide: LOCALE_ID, useValue: "fr-FR" },
   { provide: DEFAULT_CURRENCY_CODE, useValue: "EUR" },
   // Dépendance définie par Value => Valeu fixe définie au moment du démarrage
